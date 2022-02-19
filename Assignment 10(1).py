@@ -1,30 +1,36 @@
 import cv2
 from pyzbar import pyzbar
 
-def qrcode(frame):
-    qrcodes = pyzbar.decode(frame)
-    for qrcode in qrcodes:
-        z, y , x, w = qrcode.rect
-
-        qrcode_info=qrcode.data.decode('utf-8')
-        cv2.rectangle(frame, (z, y), (z+x, y+w), (0, 255, 0), 2)
+def read_barcodes(frame):
+    barcodes = pyzbar.decode(frame)
+    for barcode in barcodes:
+        x, y , w, h = barcode.rect
         
-        with open ("qrdata.txt", mode='w') as file:
-            file.write(qrcode_info)
-
+        barcode_info = barcode.data.decode('utf-8')
+        cv2.rectangle(frame, (x, y),(x+w, y+h), (0, 255, 0), 2)
+        
+        
+        font = cv2.FONT_HERSHEY_DUPLEX
+        cv2.putText(frame, barcode_info, (x + 6, y - 6), font, 2.0, (255, 255, 255), 1)
+        
+        with open("barcode_result.txt", mode ='w') as file:
+            file.write("Recognized Barcode:" + barcode_info)
     return frame
 
-
-reader=cv2.VideoCapture(0)
-ret, frame=reader.read()
+def main():
     
-while ret:
-    ret, frame=reader.read()
-    frame = qrcode(frame)
-    cv2.imshow('QR reader', frame)
-    if cv2.waitKey(1) & 0xFF==27:
-        break
-reader.release()
-cv2.destroyAllWindows()
+    camera = cv2.VideoCapture(0)
+    ret, frame = camera.read()
+    
+    while ret:
+        ret, frame = camera.read()
+        frame = read_barcodes(frame)
+        cv2.imshow('Barcode/QR code reader', frame)
+        if cv2.waitKey(1) & 0xFF == 27:
+            break
+    
+    camera.release()
+    cv2.destroyAllWindows()
 
-
+if __name__ == '__main__':
+    main()
