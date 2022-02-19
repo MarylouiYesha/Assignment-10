@@ -1,16 +1,22 @@
-import pyqrcode
-import pandas as pd
+import cv2
+import numpy as np
+from pyzbar.pyzbar import decode
 
 
-def createQRCode():
-    df = pd.read_csv("qr.csv")
+with open ("qrdata.txt", mode='w') as file:
+    file.write("Recognized Code")
+reader=cv2.VideoCapture(2)
 
-    for index, values in df.iterrows():
-        print(values)
+while True:
+    success, img = reader.read()
 
-        image=pyqrcode.create()
-        image.svg
+    if not success:
+        break
 
-createQRCode()
+    for code in decode(img):
+        print (code.data.decode("utf-8"))
+    
+    cv2.imshow("test", img)
+    cv2.waitKey(1)
 
-
+    
