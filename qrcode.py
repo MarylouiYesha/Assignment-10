@@ -1,18 +1,21 @@
+from base64 import decode
 import cv2
-import webbrowser
+import numpy as np
+import pyzbar.pyzbar as pyzbar
 
 cap=cv2.VideoCapture(0)
-detector=cv2.QRCodeDetector()
-while True:
-    _, img=cap.read()
-    data,one,_=detector.detectAndDecode(img)
-    if data:
-        a=data
-        break
-    cv2.imshow('QR READER')
-    if cv2.waitKey(1)==ord('q'):
-        break
-b=webbrowser.open(str(a))
-cap.release(a)
-cv2.destroyAllWindows()
+font = cv2.FONT_HERSHEY_PLAIN
 
+while True:
+    _, frame = cap.read()
+
+    decodedObjects = pyzbar.decode(frame)
+    for obj in decodedObjects:
+        cv2.putTest(frame, str(obj.data), (50,50), font, 3, (255,0,0), 3)
+
+    cv2.imshow("Frame",frame)
+
+    key = cv2.waitKey(1)
+
+    if key == 27:
+        break
