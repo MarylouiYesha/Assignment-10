@@ -1,0 +1,36 @@
+CONTACT TRACING
+
+PERSONAL INFORMATION
+Name: Maryloui Yesha Lacson
+Address: 000 Steet, Baliuag, Bulacan
+Birthday: December 3,2003
+Age:18
+Contact Number: 09000000000
+
+VACCINE INFORMATION
+Vaccine Manufacturer: Pfizer
+
+1st Dose: November 11, 2021
+2nd Dose: December 6, 2021
+
+COVID-19 Booster Manufacturer: N/A
+Date of Booster shot: N/A
+
+SYMPTOMS
+(for the past 15 days)
+Fever: None
+Runny Nose: None
+Cough: None
+Headache: None
+Shortness of Breath: None
+Diarrhea: None
+Sore Throat: None
+Muscle Aches: None
+
+Have been in contact with a COVID-19 Patient?: No
+Have been in contact with a Person Under Monitoring?: No
+Have been travelling outside City/Municipality of residence?: No
+
+
+Date: February 20, 2022
+Time: 23:34
