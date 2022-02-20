@@ -7,7 +7,6 @@ cap.set(3,640)
 cap.set(4,480)
 used_codes=[]
 
-
 camera=True
 while camera == True:
     success, frame = cap.read()
@@ -17,11 +16,12 @@ while camera == True:
 
     for code in decode (frame):
         info=code.data.decode('utf-8')
-        with open ("qrdata.txt", mode='w') as file:
+        with open ("Contact Tracing Information.txt", mode='w') as file:
             file.write(info + (f"\n\n\nDate: {date_}\nTime: {time_}"))
-    
-    cv2.imshow("test", frame)
-    cv2.waitKey(1)
-cap.release()
+        
+    cv2.imshow("Contact Tracing", frame)
+    if cv2.waitKey(1)==ord('q'):
+        break
 
+cap.release()
 cv2.destroyAllWindows()
